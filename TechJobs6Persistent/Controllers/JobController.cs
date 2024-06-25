@@ -31,6 +31,7 @@ namespace TechJobs6Persistent.Controllers
 
         public IActionResult Add()
         {
+            
             return View();
         }
 
