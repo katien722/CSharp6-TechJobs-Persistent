@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Net.Http.Headers;
 namespace TechJobs6Persistent.Models
 {
     public class Employer
@@ -7,15 +8,19 @@ namespace TechJobs6Persistent.Models
         public string Name { get; set; }
         public string Location { get; set; }
 
+        List<Job> Jobs { get; set; }
+
 
         public Employer(string name, string location)
         {
             Name = name;
             Location = location;
+            Jobs = []; 
         }
 
         public Employer()
         {
+
         }
     }
 }

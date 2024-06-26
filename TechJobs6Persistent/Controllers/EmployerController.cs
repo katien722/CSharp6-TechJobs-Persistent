@@ -31,9 +31,8 @@ namespace TechJobs6Persistent.Controllers
         public IActionResult Index()
         {
             List<Employer> employers = context.Employers
-          //  .Include(e => e.Category) //what is the category here? See ch 18 text " " => return expression
             .ToList();
-
+           
             return View(employers);
 
         }
@@ -41,18 +40,44 @@ namespace TechJobs6Persistent.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel();
+        
+            return View(addEmployerViewModel);
         }
 
         [HttpPost]
-        public IActionResult ProcessCreateEmployerForm()
+        public IActionResult ProcessCreateEmployerForm(AddEmployerViewModel addEmployerViewModel)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Employer employer =
+
+                new()
+                {
+                    Name = addEmployerViewModel.Name,
+                    Location = addEmployerViewModel.Location
+
+                };
+
+                context.Employers.Add(employer);
+                context.SaveChanges();
+
+                return Redirect("/employer");
+            }
+            
+            return View("Create", addEmployerViewModel); 
         }
 
         public IActionResult About(int id)
         {
-            return View();
+            Employer? theEmployer = context.Employers.Find(id);
+
+            if (theEmployer != null)
+            {
+                return View(theEmployer);
+            }
+            
+            return View("Index"); 
         }
 
     }
