@@ -58,10 +58,13 @@ namespace TechJobs6Persistent.Controllers
                 context.Jobs.Add(job);
                 context.SaveChanges();
 
-                return Redirect("/Jobs");
-            }
+                return Redirect("/Job");
 
-            return View();
+            }
+            List<Employer> employers = context.Employers.ToList(); 
+            addJobViewModel = new AddJobViewModel(employers);  
+
+            return View(addJobViewModel);
         }
 
         public IActionResult Delete()
