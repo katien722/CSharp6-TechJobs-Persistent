@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TechJobs6Persistent.Models;
 using TechJobs6Persistent.Controllers;
+using Microsoft.Extensions.Hosting;
 
 namespace TechJobs6Persistent.Data
 {
@@ -20,9 +21,15 @@ namespace TechJobs6Persistent.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //set up your connection for one to many (employer to jobs)
+             modelBuilder.Entity<Job>()
+                .HasOne(p => p.Employer)
+                .WithMany(b => b.Jobs);
 
-            //set up your connection for many to many (skills to jobs)
+             modelBuilder.Entity<Job>()
+                .HasMany(t => t.Skills)    
+                .WithMany(t => t.Jobs)
+                .UsingEntity(Job => Job.ToTable("JobSkills"));
+           
         }
     }
 }

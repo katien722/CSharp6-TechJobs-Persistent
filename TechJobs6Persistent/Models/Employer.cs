@@ -8,7 +8,7 @@ namespace TechJobs6Persistent.Models
         public string Name { get; set; }
         public string Location { get; set; }
 
-        List<Job> Jobs { get; set; }
+        public List<Job> Jobs { get; set; }
 
 
         public Employer(string name, string location)
