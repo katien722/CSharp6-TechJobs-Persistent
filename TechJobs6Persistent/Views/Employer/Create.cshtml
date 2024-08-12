@@ -20,9 +20,14 @@
     </div>
 
     <br />
+@* below is added for commit evidence, to be played with and not used for original LaunchCode assignment: *@
+   <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
 
     
-
     <input type="submit" value="Add Employer" />
 
 </form>
